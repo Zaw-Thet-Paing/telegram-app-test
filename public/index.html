@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="my">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Products</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">CATALOG</p>
+        <h1>Products</h1>
+      </div>
+      <button id="refresh" class="icon-button" type="button" aria-label="Refresh products">↻</button>
+    </header>
+
+    <main>
+      <label class="search">
+        <span>⌕</span>
+        <input id="search" type="search" placeholder="ပစ္စည်းရှာရန်..." autocomplete="off" />
+      </label>
+
+      <div class="summary">
+        <span id="count">Loading products…</span>
+        <span id="updated"></span>
+      </div>
+
+      <section id="loading" class="product-grid" aria-label="Loading products">
+        <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+      </section>
+
+      <section id="products" class="product-grid" aria-live="polite" hidden></section>
+
+      <section id="empty" class="state" hidden>
+        <div class="state-icon">📦</div>
+        <h2>Product မတွေ့ပါ</h2>
+        <p>ရှာဖွေထားတဲ့ စာသားကို ပြောင်းပြီး ထပ်စမ်းကြည့်ပါ။</p>
+      </section>
+
+      <section id="error" class="state" hidden>
+        <div class="state-icon">!</div>
+        <h2>Product များ မရနိုင်သေးပါ</h2>
+        <p id="error-message">ခဏနေ ပြန်စမ်းကြည့်ပါ။</p>
+        <button id="retry" class="primary-button" type="button">ထပ်စမ်းမယ်</button>
+      </section>
+    </main>
+  </body>
+</html>

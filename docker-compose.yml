@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      PRODUCT_API_URL: "${PRODUCT_API_URL:-}"
+      PRODUCT_API_METHOD: "${PRODUCT_API_METHOD:-POST}"
+      PRODUCT_API_TOKEN: "${PRODUCT_API_TOKEN:-}"
+      PRODUCT_API_BODY: "${PRODUCT_API_BODY:-{}}"
+      PRODUCT_API_HEADERS: "${PRODUCT_API_HEADERS:-{}}"
+    expose:
+      - "3000"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - fetch('http://127.0.0.1:3000/').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
