@@ -4,6 +4,15 @@ tg?.expand();
 tg?.setHeaderColor?.('#0f172a');
 tg?.setBackgroundColor?.('#07111f');
 
+const telegramUser = tg?.initDataUnsafe?.user;
+
+function getTelegramDisplayName(user) {
+  if (!user) return '';
+
+  const fullName = [user.first_name, user.last_name].filter(Boolean).join(' ').trim();
+  return fullName || (user.username ? `@${user.username}` : '');
+}
+
 const elements = {
   products: document.querySelector('#products'),
   loading: document.querySelector('#loading'),
@@ -16,6 +25,11 @@ const elements = {
   refresh: document.querySelector('#refresh'),
   retry: document.querySelector('#retry')
 };
+
+const displayName = getTelegramDisplayName(telegramUser);
+document.querySelector('#welcome').textContent = displayName
+  ? `Welcome, ${displayName}`
+  : 'Welcome';
 
 let products = [];
 
